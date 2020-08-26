@@ -22,11 +22,11 @@ if [ "$3" == "update" ]; then
       UPDATE="1"
 fi
 if [ "$UPDATE" != "1" ]; then
-      git clone https://github.com/raspberrypi/tools.git ../../Cyborg-1.5-Oled-Eye-RaspberryPi-Crosscompile-Env/raspberrypi-tools
+      git clone https://github.com/raspberrypi/tools.git ../../Cyborg-1.5-Oled-Eye-RaspberryPi-Cross-Compile-Env/raspberrypi-tools
 fi
 
- sshpass -p $PASS rsync -r -P --links pi@$IP:/lib ../../Cyborg-1.5-Oled-Eye-RaspberryPi-Crosscompile-Env/raspberrypi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/arm-linux-gnueabihf/sysroot/
- sshpass -p $PASS rsync -r -P --links pi@$IP:/usr ../../Cyborg-1.5-Oled-Eye-RaspberryPi-Crosscompile-Env/raspberrypi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/arm-linux-gnueabihf/sysroot/
- sshpass -p $PASS rsync -r -P --links pi@$IP:/bin ../../Cyborg-1.5-Oled-Eye-RaspberryPi-Crosscompile-Env/raspberrypi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/arm-linux-gnueabihf/sysroot/
- sshpass -p $PASS rsync -r -P --links pi@$IP:/opt ../../Cyborg-1.5-Oled-Eye-RaspberryPi-Crosscompile-Env/raspberrypi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/arm-linux-gnueabihf/sysroot/
- sshpass -p $PASS rsync -r -P --links pi@$IP:/var ../../Cyborg-1.5-Oled-Eye-RaspberryPi-Crosscompile-Env/raspberrypi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/arm-linux-gnueabihf/sysroot/
+ sshpass -p $PASS rsync -r -P --links pi@$IP:/lib ../../Cyborg-1.5-Oled-Eye-RaspberryPi-Cross-Compile-Env/raspberrypi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/arm-linux-gnueabihf/sysroot/
+ sshpass -p $PASS rsync -r -P --links pi@$IP:/usr ../../Cyborg-1.5-Oled-Eye-RaspberryPi-Cross-Compile-Env/raspberrypi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/arm-linux-gnueabihf/sysroot/
+ sshpass -p $PASS rsync -r -P --links pi@$IP:/bin ../../Cyborg-1.5-Oled-Eye-RaspberryPi-Cross-Compile-Env/raspberrypi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/arm-linux-gnueabihf/sysroot/
+ sshpass -p $PASS rsync -r -P --links pi@$IP:/opt ../../Cyborg-1.5-Oled-Eye-RaspberryPi-Cross-Compile-Env/raspberrypi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/arm-linux-gnueabihf/sysroot/
+ sshpass -p $PASS rsync -r -P --links pi@$IP:/var ../../Cyborg-1.5-Oled-Eye-RaspberryPi-Cross-Compile-Env/raspberrypi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/arm-linux-gnueabihf/sysroot/
