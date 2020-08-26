@@ -10,7 +10,7 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 # Search for libraries and headers in the valueTarget directories only
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
-
+#
 SET ( CMAKE_CXX_FLAGS "-std=c++0x --sysroot=${CMAKE_FIND_ROOT_PATH} -Wl,-rpath,/opt/vc/lib" )
 
 

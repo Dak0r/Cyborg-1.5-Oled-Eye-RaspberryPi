@@ -19,6 +19,8 @@ unsigned long  millis(){
 }
 
 int main(int argc, char* argv[]) {
+    std::cout << "Hello World" << std::endl;
+
     startTime = millis();
 
     int targetFPS = 60;
@@ -27,7 +29,7 @@ int main(int argc, char* argv[]) {
     CyberEye cyberEye;
     signal(SIGINT, &sigint_handler);
 
-    std::cout << "Hello World" << std::endl;
+
     cyberEye.setup(argc, argv);
 
     while(!cancel){
