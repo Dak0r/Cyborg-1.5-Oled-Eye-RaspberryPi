@@ -1,7 +1,6 @@
+#include "CyberEye.h"
 #include <iostream>
 #include <unistd.h>
-
-#include "CyberEye.h"
 
 
 void CyberEye::buildConfig(EyeConfig *eyeConfig) {

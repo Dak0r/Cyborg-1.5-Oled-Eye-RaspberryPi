@@ -1,8 +1,8 @@
+#include "CyberEye.h"
 #include <iostream>
 #include <unistd.h>
 #include <chrono>
 #include <signal.h>
-#include "CyberEye.h"
 
 bool cancel;
 unsigned long startTime = 0;

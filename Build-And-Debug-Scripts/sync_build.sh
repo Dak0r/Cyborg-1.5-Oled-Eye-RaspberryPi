@@ -16,5 +16,5 @@ else
 fi
 
 sshpass -p $PASS ssh pi@$IP "mkdir cyborg_build"
-sshpass -p $PASS rsync -r -P --links ../cmake-build-debug-arm/Cyborg_1_5_Oled_Eye_RasperryPi pi@$IP:/home/pi/cyborg_build/
+sshpass -p $PASS rsync -r -P --links ../cmake-build-debug/Cyborg_1_5_Oled_Eye_RasperryPi pi@$IP:/home/pi/cyborg_build/
 sshpass -p $PASS rsync -zarv --prune-empty-dirs --include="*/" --include="*.cpp" --exclude="*" ../ pi@$IP:/home/pi/cyborg_build/

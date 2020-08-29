@@ -30,6 +30,9 @@ if [ "$UPDATE" != "1" ]; then
 fi
 
 
+sudo apt-get install sshpass gcc-multilib g++-multilib
+
+
  sshpass -p $PASS rsync -r -P --links pi@$IP:/usr ../../Cyborg-1.5-Oled-Eye-RaspberryPi-Cross-Compile-Env/raspberrypi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/arm-linux-gnueabihf/sysroot/
  sshpass -p $PASS rsync -r -P --links pi@$IP:/bin ../../Cyborg-1.5-Oled-Eye-RaspberryPi-Cross-Compile-Env/raspberrypi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/arm-linux-gnueabihf/sysroot/
  sshpass -p $PASS rsync -r -P --links pi@$IP:/opt ../../Cyborg-1.5-Oled-Eye-RaspberryPi-Cross-Compile-Env/raspberrypi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/arm-linux-gnueabihf/sysroot/
