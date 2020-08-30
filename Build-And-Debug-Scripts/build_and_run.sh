@@ -17,4 +17,4 @@ build.sh
 
 utils/sync_build.sh $IP $PASS
 
-sshpass -p "raspberry" ssh pi@$IP "zsh -l -c 'cd /home/pi/cyborg_build/ && ./Cyborg_1_5_Oled_Eye_RasperryPi'"
+sshpass -p "raspberry" ssh pi@$IP "zsh -l -c 'cd /home/pi/cyborg_build/ && ./Cyborg_1_5_Oled_Eye_RaspberryPi'"

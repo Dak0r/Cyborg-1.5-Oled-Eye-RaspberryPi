@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(Cyborg_1_5_Oled_Eye_RasperryPi)
+project(Cyborg_1_5_Oled_Eye_RaspberryPi)
 
 set(CMAKE_BUILD_TYPE Debug)
 #set(CMAKE_BUILD_TYPE Release)
@@ -19,7 +19,7 @@ add_executable(Cyborg_1_5_Oled_Eye_RasperryPi
 
 find_library(WIRINGPI wiringPi)
 
-target_link_libraries(Cyborg_1_5_Oled_Eye_RasperryPi
+target_link_libraries(Cyborg_1_5_Oled_Eye_RaspberryPi
         "${WIRINGPI}"
         )
 

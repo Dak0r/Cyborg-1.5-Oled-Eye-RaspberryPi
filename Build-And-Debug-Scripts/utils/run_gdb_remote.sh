@@ -20,4 +20,4 @@ sshpass -p $PASS ssh pi@$IP killall gdbserver &> /dev/null
 sshpass -p $PASS ssh \
   -L9091:localhost:9091 \
   pi@$IP \
-  "zsh -l -c 'cd /home/pi/cyborg_build/ && gdbserver --once :9091 ./Cyborg_1_5_Oled_Eye_RasperryPi'"
+  "zsh -l -c 'cd /home/pi/cyborg_build/ && gdbserver --once :9091 ./Cyborg_1_5_Oled_Eye_RaspberryPi'"
