@@ -1,7 +1,9 @@
 # Cyborg-1.5-Oled-Eye-RaspberryPi
 Displays an eye with natural random movement on an 1.5" Oled connected to the pi. Made it for a Cyberpunk / Cyborg costume 
 
-
+## Checkout
+Checkout this repository and its submodules:
+```git clone --recurse-submodules https://github.com/Dak0r/Cyborg-1.5-Oled-Eye-RaspberryPi.git``` 
 
 ## Setup
 Call Setup-Script: setup.sh to automatically setup your pi and the cross compile environment
