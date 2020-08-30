@@ -11,8 +11,8 @@ if [ "$2" != "" ]; then
 else
       PASS="raspberry"
 fi
-./cmake_build.sh
+build.sh
 
-./sync_build.sh $IP $PASS
+utils/sync_build.sh $IP $PASS
 
-./run_gdb_remote.sh $IP $PASS
+utils/run_gdb_remote.sh $IP $PASS

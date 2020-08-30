@@ -1,6 +1,7 @@
 #include "CyberEye.h"
 #include <iostream>
 #include <unistd.h>
+#include <wiringPi.h>
 
 
 void CyberEye::buildConfig(EyeConfig *eyeConfig) {
@@ -33,8 +34,10 @@ void CyberEye::setup(int argc, char **argv) {
 
 bool CyberEye::loop(unsigned long now) {
 
-        eye.update(now);
+    bool exit_application = false;
 
-        return false;
+    eye.update(now);
+
+    return exit_application;
 }
 

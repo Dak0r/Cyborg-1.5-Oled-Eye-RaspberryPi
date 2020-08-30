@@ -13,8 +13,8 @@ else
       PASS="raspberry"
 fi
 
-./cmake_build.sh
+build.sh
 
-./sync_build.sh $IP $PASS
+utils/sync_build.sh $IP $PASS
 
 sshpass -p "raspberry" ssh pi@$IP "zsh -l -c 'cd /home/pi/cyborg_build/ && ./Cyborg_1_5_Oled_Eye_RasperryPi'"
