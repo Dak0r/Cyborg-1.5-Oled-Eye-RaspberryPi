@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+mkdir ../cmake-build/
 cd ../cmake-build/
 #./cmake_build.sh
 export RASPBIAN_ROOTFS=$HOME/Projects/Cyborg-1.5-Oled-Eye-RaspberryPi-Cross-Compile-Sysroot/

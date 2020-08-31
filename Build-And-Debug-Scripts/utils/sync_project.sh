@@ -16,4 +16,4 @@ else
 fi
 
 sshpass -p $PASS ssh pi@$IP "mkdir cyborg_src"
-sshpass -p $PASS rsync -zarv --prune-empty-dirs ../ pi@$IP:/home/pi/cyborg_src/
+sshpass -p $PASS rsync -zarv --prune-empty-dirs ../../ pi@$IP:/home/pi/cyborg_src/
