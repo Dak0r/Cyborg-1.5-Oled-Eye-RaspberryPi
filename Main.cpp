@@ -19,12 +19,14 @@ unsigned long  millis(){
 }
 
 int main(int argc, char* argv[]) {
-    std::cout << "Hello World" << std::endl;
+    printf("CYBORG EYE :: RUNNING\n");
 
     startTime = millis();
 
     int targetFPS = 60;
     int targetFrameTime = 1000/targetFPS;
+
+    printf("Target FPS %d\n", targetFPS);
 
     CyberEye cyberEye;
     signal(SIGINT, &sigint_handler);
@@ -40,8 +42,6 @@ int main(int argc, char* argv[]) {
         unsigned long after = millis();
 
         unsigned long waitTime = targetFrameTime-(after-now);
-
-        //std::cout << "FrameWaitTime: " << waitTime << std::endl;
 
         usleep(waitTime * 1000);
     }
