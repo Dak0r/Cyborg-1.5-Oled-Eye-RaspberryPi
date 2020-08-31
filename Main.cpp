@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
 
         unsigned long waitTime = targetFrameTime-(after-now);
 
-        std::cout << "FrameWaitTime: " << waitTime << std::endl;
+        //std::cout << "FrameWaitTime: " << waitTime << std::endl;
 
         usleep(waitTime * 1000);
     }
