@@ -31,6 +31,8 @@ void CyberEye::buildConfig(EyeConfig *eyeConfig) {
 
     eyeConfig->eyelid_movement_speed = 0.25;
 
+    eyeConfig->pupil_size.min = 0.4f;
+    eyeConfig->pupil_size.max = 0.9f;
     eyeConfig->pupil_size_speed = 0.1;
 }
 //
@@ -103,6 +105,9 @@ bool CyberEye::loop(unsigned long now) {
     GUI_DrawCircle(posX, posY, size+10, WHITE, DRAW_EMPTY , DOT_PIXEL_DFT);
     GUI_DrawCircle(posX, posY, size+6, WHITE, DRAW_EMPTY , DOT_PIXEL_DFT);
     GUI_DrawCircle(posX, posY, size*eye.get_pupil_size(), WHITE, DRAW_FULL , DOT_PIXEL_DFT);
+
+    //GUI_DrawLine(posX, posY-10, posX, posY+10, BLACK, LINE_DOTTED, DOT_PIXEL_2X2);
+    //GUI_DrawLine(posX-10, posY, posX+10, posY, BLACK, LINE_DOTTED, DOT_PIXEL_2X2);
 
     //u8g2.drawBox(posX-48, posY-48,98,96*eye.get_upper_eyelid());
     //printf("Eyelid Y-Bottom: %d \n", lerpInt(posY-60, posY, eye.get_upper_eyelid()));
