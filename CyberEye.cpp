@@ -47,7 +47,7 @@ void CyberEye::setup(int argc, char **argv) {
 
     buildConfig(&eye_config);
 
-    eye.init_pos();
+    eye.init_pos(millis());
 
 
     printf("1.5inch OLED Moudle Demo\r\n");
@@ -124,5 +124,11 @@ bool CyberEye::loop(unsigned long now) {
     OLED_DisWindow(0, 0, 127, 127);
 
     return exit_application;
+}
+
+void CyberEye::quit() {
+    OLED_ClearWindow(0, 0, 127, 127, BLACK);
+    OLED_DisWindow(0, 0, 127, 127);
+    DEV_ModuleExit();
 }
 

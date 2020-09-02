@@ -59,4 +59,6 @@ int main(int argc, char* argv[]) {
         printf("Time Scale:  %f  -  Wait Time: %d\n", time_scale(), waitTime);
     }
 
+    cyberEye.quit();
+
 }

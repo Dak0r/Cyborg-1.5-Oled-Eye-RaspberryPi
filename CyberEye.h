@@ -25,5 +25,7 @@ public:
 
     bool loop(unsigned long now);
 
+    void quit();
+
 };
 #endif //CYBORG_1_5_OLED_EYE_RASPERRYPI_CYBEREYE_H
