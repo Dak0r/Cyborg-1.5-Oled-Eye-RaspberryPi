@@ -29,9 +29,9 @@ void CyberEye::buildConfig(EyeConfig *eyeConfig) {
     eyeConfig->eyelid_lower_y_range.min = 1.0;
     eyeConfig->eyelid_lower_y_range.max = 0.5;
 
-    eyeConfig->eyelid_movement_speed = 0.5;
+    eyeConfig->eyelid_movement_speed = 0.25;
 
-    eyeConfig->pupil_size_speed = 0.2;
+    eyeConfig->pupil_size_speed = 0.1;
 }
 //
 time_t oled_now;
@@ -97,7 +97,7 @@ bool CyberEye::loop(unsigned long now) {
 
     OLED_ClearWindow(0, 0, 127, 127, BLACK);
 
-    int posX = (int)(64 + (eye.get_position_x()*20));
+    int posX = (int)(64 + (eye.get_position_x()*18));
     int posY = (int)(64 + (eye.get_position_y()*10));
     int size = 36;
     GUI_DrawCircle(posX, posY, size+10, WHITE, DRAW_EMPTY , DOT_PIXEL_DFT);
