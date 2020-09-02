@@ -220,10 +220,18 @@ void OLED_SetColor(POINT Xpoint, POINT Ypoint, COLOR Color)
         return;
     }
     //1 byte control two points
-    if(Xpoint % 2 == 0) {
-        Buffer[Xpoint / 2 + Ypoint * 64] = (Color << 4) | Buffer[Xpoint / 2 + Ypoint * 64];
-    } else {
-        Buffer[Xpoint / 2 + Ypoint * 64] = (Color & 0x0f) | Buffer[Xpoint / 2 + Ypoint * 64];
+    if(Color == 0x0){
+        if (Xpoint % 2 == 0) {
+            Buffer[Xpoint / 2 + Ypoint * 64] = (Color << 4) & Buffer[Xpoint / 2 + Ypoint * 64];
+        } else {
+            Buffer[Xpoint / 2 + Ypoint * 64] = (Color & 0x0f) & Buffer[Xpoint / 2 + Ypoint * 64];
+        }
+    }else {
+        if (Xpoint % 2 == 0) {
+            Buffer[Xpoint / 2 + Ypoint * 64] = (Color << 4) | Buffer[Xpoint / 2 + Ypoint * 64];
+        } else {
+            Buffer[Xpoint / 2 + Ypoint * 64] = (Color & 0x0f) | Buffer[Xpoint / 2 + Ypoint * 64];
+        }
     }
 }
 
