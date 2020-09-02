@@ -18,15 +18,15 @@ extern "C" {
 
 
 void CyberEye::buildConfig(EyeConfig *eyeConfig) {
-    eyeConfig->blink_timing_duration.min = 65;
-    eyeConfig->blink_timing_duration.max = 85;
+    eyeConfig->blink_timing_duration.min = 65; // was -200
+    eyeConfig->blink_timing_duration.max = 85; // was -200
 
-    eyeConfig->blink_timing_in_between.min = 1000;
-    eyeConfig->blink_timing_in_between.max = 7000;
+    eyeConfig->blink_timing_in_between.min = 0;
+    eyeConfig->blink_timing_in_between.max = 4000;
 
-    eyeConfig->eyelid_upper_y_range.min = 0.1;
+    eyeConfig->eyelid_upper_y_range.min = 0.0;
     eyeConfig->eyelid_upper_y_range.max = 0.5;
-    eyeConfig->eyelid_lower_y_range.min = 0.9;
+    eyeConfig->eyelid_lower_y_range.min = 1.0;
     eyeConfig->eyelid_lower_y_range.max = 0.5;
 
     eyeConfig->eyelid_movement_speed = 0.5;
@@ -55,34 +55,19 @@ void CyberEye::setup(int argc, char **argv) {
         exit(0);
     }
 
+
+    OLED_Clear(OLED_BACKGROUND);//OLED_BACKGROUND
+    OLED_Display();
     //2.show
     printf("**********Init OLED**********\r\n");
     OLED_SCAN_DIR OLED_ScanDir = SCAN_DIR_DFT;//SCAN_DIR_DFT = D2U_L2R
     OLED_Init(OLED_ScanDir );
 
-    printf("OLED Show \r\n");
+    /*printf("OLED Show \r\n");
     GUI_Show();
 
-    OLED_Clear(OLED_BACKGROUND);//OLED_BACKGROUND
-    OLED_Display();
-
-    printf("Show Pic\r\n");
-    GUI_Disbitmap(0  , 2, Signal816  , 16, 8);
-    GUI_Disbitmap(24 , 2, Bluetooth88, 8 , 8);
-    GUI_Disbitmap(40 , 2, Msg816     , 16, 8);
-    GUI_Disbitmap(64 , 2, GPRS88     , 8 , 8);
-    GUI_Disbitmap(90 , 2, Alarm88    , 8 , 8);
-    GUI_Disbitmap(112, 2, Bat816     , 16, 8);
-
-    printf("Show 16 Gray Map\r\n");
-    GUI_DisGrayMap(0,73,gImage_flower);
-
-    GUI_DisString_EN(0 , 52, "MUSIC", &Font12, FONT_BACKGROUND, WHITE);
-    GUI_DisString_EN(48, 52, "MENU" , &Font12, FONT_BACKGROUND, WHITE);
-    GUI_DisString_EN(90, 52, "PHONE", &Font12, FONT_BACKGROUND, WHITE);
-    OLED_Display();
-
-    printf("Show time\r\n");
+    OLED_Clear(OLED_BACKGROUND);//OLED_BACKGROUND*/
+    //OLED_Display();
 
 }
 
@@ -94,7 +79,7 @@ bool CyberEye::loop(unsigned long now) {
 
     eye.update(now);
 
-    time(&oled_now);
+    /*time(&oled_now);
     timenow = localtime(&oled_now);
 
     sDev_time.Hour = timenow->tm_hour;
@@ -104,10 +89,34 @@ bool CyberEye::loop(unsigned long now) {
 
     OLED_ClearWindow(0, 22, 127, 47, WHITE);
     GUI_Showtime(0, 22, 127, 47, &sDev_time, WHITE);
-    if(now_time != new_time){
+         if(now_time != new_time){
         OLED_DisWindow(0, 22, 127, 47);
         new_time = now_time;
     }
+     */
+
+    OLED_ClearWindow(0, 0, 127, 127, BLACK);
+
+    int posX = (int)(64 + (eye.get_position_x()*20));
+    int posY = (int)(64 + (eye.get_position_y()*10));
+    int size = 36;
+    GUI_DrawCircle(posX, posY, size+10, WHITE, DRAW_EMPTY , DOT_PIXEL_DFT);
+    GUI_DrawCircle(posX, posY, size+6, WHITE, DRAW_EMPTY , DOT_PIXEL_DFT);
+    GUI_DrawCircle(posX, posY, size*eye.get_pupil_size(), WHITE, DRAW_FULL , DOT_PIXEL_DFT);
+
+    //u8g2.drawBox(posX-48, posY-48,98,96*eye.get_upper_eyelid());
+    //printf("Eyelid Y-Bottom: %d \n", lerpInt(posY-60, posY, eye.get_upper_eyelid()));
+    //printf("Eyelid Y-Bottom: %f ---- %d \n", eye.get_upper_eyelid(), lerpInt(0, 127, eye.get_upper_eyelid()));
+    //GUI_DrawRectangle(posX-60, 0, posX+60, lerpInt(0, 127, eye.get_upper_eyelid()), WHITE, DRAW_FULL , DOT_PIXEL_DFT);
+    //GUI_DrawRectangle(0, 0, 127, lerpInt(0, 127, eye.get_upper_eyelid()), BLACK, DRAW_FULL , DOT_PIXEL_DFT);
+    OLED_ClearWindow(0, 0, 127, lerpInt(0, 127, eye.get_upper_eyelid()), BLACK);
+    OLED_ClearWindow(0, lerpInt(0, 127, eye.get_lower_eyelid()), 127, 127, BLACK);
+    //float lower_eyelid = eye.get_lower_eyelid();
+    //GUI_DrawRectangle(posX-30, posY-30+(98*(lower_eyelid)), posX+30, posY+30, BLACK, DRAW_FULL , DOT_PIXEL_DFT);
+    //u8g2.drawBox(posX-48, posY-48+(98*(lower_eyelid)),98,48);
+
+
+    OLED_DisWindow(0, 0, 127, 127);
 
     return exit_application;
 }
