@@ -7,7 +7,7 @@ extern "C" {
 
 #include <iostream>
 #include <unistd.h>
-#include <wiringPi.h>
+
 
 #include <signal.h>
 
@@ -71,6 +71,10 @@ void CyberEye::setup(int argc, char **argv) {
     OLED_Clear(OLED_BACKGROUND);//OLED_BACKGROUND*/
     //OLED_Display();
 
+
+    ledStrip.init();
+
+
 }
 
 bool CyberEye::loop(unsigned long now) {
@@ -80,6 +84,7 @@ bool CyberEye::loop(unsigned long now) {
     bool exit_application = false;
 
     eye.update(now);
+    ledStrip.update(now);
 
     /*time(&oled_now);
     timenow = localtime(&oled_now);
@@ -97,7 +102,7 @@ bool CyberEye::loop(unsigned long now) {
     }
      */
 
-    OLED_ClearWindow(0, 0, 127, 127, BLACK);
+    OLED_ClearWindow(0, 0, 128, 128, BLACK);
 
     int posX = (int)(64 + (eye.get_position_x()*18));
     int posY = (int)(64 + (eye.get_position_y()*10));
@@ -114,8 +119,10 @@ bool CyberEye::loop(unsigned long now) {
     //printf("Eyelid Y-Bottom: %f ---- %d \n", eye.get_upper_eyelid(), lerpInt(0, 127, eye.get_upper_eyelid()));
     //GUI_DrawRectangle(posX-60, 0, posX+60, lerpInt(0, 127, eye.get_upper_eyelid()), WHITE, DRAW_FULL , DOT_PIXEL_DFT);
     //GUI_DrawRectangle(0, 0, 127, lerpInt(0, 127, eye.get_upper_eyelid()), BLACK, DRAW_FULL , DOT_PIXEL_DFT);
-    OLED_ClearWindow(0, 0, 127, lerpInt(0, 127, eye.get_upper_eyelid()), BLACK);
-    OLED_ClearWindow(0, lerpInt(0, 127, eye.get_lower_eyelid()), 127, 127, BLACK);
+
+    OLED_ClearWindow(0, 0, 128, lerpInt(0, 128, eye.get_upper_eyelid()), BLACK);
+    OLED_ClearWindow(0, lerpInt(0, 128, eye.get_lower_eyelid()), 128, 128, BLACK);
+
     //float lower_eyelid = eye.get_lower_eyelid();
     //GUI_DrawRectangle(posX-30, posY-30+(98*(lower_eyelid)), posX+30, posY+30, BLACK, DRAW_FULL , DOT_PIXEL_DFT);
     //u8g2.drawBox(posX-48, posY-48+(98*(lower_eyelid)),98,48);
@@ -127,8 +134,9 @@ bool CyberEye::loop(unsigned long now) {
 }
 
 void CyberEye::quit() {
-    OLED_ClearWindow(0, 0, 127, 127, BLACK);
-    OLED_DisWindow(0, 0, 127, 127);
+    OLED_ClearWindow(0, 0, 128, 128, BLACK);
+    OLED_DisWindow(0, 0, 128, 128);
     DEV_ModuleExit();
+    ledStrip.exit();
 }
 

@@ -7,6 +7,7 @@
 
 #include "Natural-Eye-Behavior/Eye.h"
 #include "Natural-Eye-Behavior/EyeConfig.h"
+#include "Utils/LedStrip.h"
 
 using namespace EyeBehavior;
 
@@ -15,7 +16,7 @@ class CyberEye
 private:
     EyeConfig eye_config;
     Eye eye;
-
+    LedStrip ledStrip;
     void buildConfig(EyeConfig *eyeConfig);
 
 public:

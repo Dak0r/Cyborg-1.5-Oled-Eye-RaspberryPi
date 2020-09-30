@@ -12,7 +12,7 @@ void sigint_handler(int sig) {
     cancel = true;
 }
 
-unsigned long  millis(){
+unsigned long  getTimeMillis(){
     auto time = std::chrono::high_resolution_clock::now().time_since_epoch();
     return std::chrono::duration_cast<std::chrono::milliseconds>(time).count() -  startTime;
 }
@@ -25,7 +25,7 @@ float time_scale(){
 int main(int argc, char* argv[]) {
     printf("CYBORG EYE :: RUNNING\n");
 
-    startTime = millis();
+    startTime = getTimeMillis();
 
     int targetFPS = 30;
     //int targetFPS = 10; // for easier debugging
@@ -36,17 +36,16 @@ int main(int argc, char* argv[]) {
     CyberEye cyberEye;
     signal(SIGINT, &sigint_handler);
 
-
     cyberEye.setup(argc, argv);
 
     while(!cancel){
-        unsigned long now = millis();
+        unsigned long now = getTimeMillis();
 
         bool cancel_app = cyberEye.loop(now);
 
         cancel = cancel || cancel_app;
 
-        unsigned long after = millis();
+        unsigned long after = getTimeMillis();
 
         unsigned long loopTime = (after-now);
 
@@ -60,5 +59,7 @@ int main(int argc, char* argv[]) {
     }
 
     cyberEye.quit();
+
+
 
 }
