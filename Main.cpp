@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
 
         timeScale = (float) (loopTime + waitTime) / refValue;
 
-        printf("Time Scale:  %f  -  Wait Time: %d\n", time_scale(), waitTime);
+        //printf("Time Scale:  %f  -  Wait Time: %d\n", time_scale(), waitTime);
     }
 
     cyberEye.quit();
