@@ -65,6 +65,9 @@ void CyberEye::setup(int argc, char **argv) {
     OLED_SCAN_DIR OLED_ScanDir = SCAN_DIR_DFT;//SCAN_DIR_DFT = D2U_L2R
     OLED_Init(OLED_ScanDir );
 
+    OLED_ClearWindow(0, 0, 128, 128, BLACK);
+    OLED_DisWindow(0, 0, 128, 128);
+
     /*printf("OLED Show \r\n");
     GUI_Show();
 
