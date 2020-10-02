@@ -48,13 +48,38 @@ void LedStrip::update(unsigned long time) {
             digitalWrite(ledPins[ledIndex], 0);
         }else if((state >= 2*ledCount) && (state < 3*ledCount -1)){ // Second: running light to left
             clearLeds();
+            digitalWrite(ledPins[ledCount-1], HIGH);
             int ledIndex = ledCount - (state - (2*ledCount)+2) ;
             //printf("LED Strip Running Light BACK  %d \n", ledIndex);
             digitalWrite(ledPins[ledIndex], HIGH);
+        }else if((state >= 3*ledCount-1) && (state < 4*ledCount -3)){ // Second: running light to left
+            //clearLeds();
+            int ledIndex = (state - (3*ledCount)+2) ;
+            //printf("LED Strip MUTUAL %d \n", ledIndex);
+            if(ledIndex < ledCount/2){
+                digitalWrite(ledPins[ledCount-1-ledIndex], HIGH);
+                digitalWrite(ledPins[ledIndex], HIGH);
+            }else{
+                ledIndex = ledIndex-ledCount/2;
+                //printf("LED Strip OFF %d \n", ledIndex);
+
+                digitalWrite(ledPins[(ledCount-1)/2-ledIndex], 0);
+                digitalWrite(ledPins[(ledCount)/2+ledIndex], 0);
+            }
+        }else if((state >= 4*ledCount -3) && (state < 5*ledCount -4)){ // Second: running light to left
+            clearLeds();
+            int ledIndex = ledCount - (state - (4*ledCount)+5) ;
+            //printf("LED Strip Running Light BACK  %d \n", ledIndex);
+            digitalWrite(ledPins[ledIndex], HIGH);
+
+            if(ledIndex >= ledCount/2){
+                int ledIndexAlt = (state - (4*ledCount)+5) ;
+                digitalWrite(ledPins[ledIndexAlt], HIGH);
+            }
         }else {
             //printf("LED Strip RESET \n");
             state = 1;
-            next_timing = 0;
+            next_timing = 1;
         }
     }
 }
