@@ -3,6 +3,7 @@
 //
 
 #include "LedStrip.h"
+#include <iostream>
 
 #include <unistd.h>
 #include <wiringPi.h>
@@ -14,13 +15,11 @@
 #define I2CADDR 0x20
 
 void LedStrip::init() {
-    //wiringPiSetup () ;
     mcp23017Setup(BASE, I2CADDR);
 
     // OLED USES BCM MODE SO WE NEED TO USE THIS TOO
-    pinMode(16, OUTPUT);
-    digitalWrite(16, HIGH);
-
+    //pinMode(16, OUTPUT);
+    //digitalWrite(16, HIGH);
 
     for(int i=0; i < ledCount; i++){
         pinMode(ledPins[i], OUTPUT);
@@ -37,23 +36,32 @@ void LedStrip::update(unsigned long time) {
 
     if(next_timing < time){
         state++;
+        //printf("LED Strip State:  %d \n", state);
         next_timing = time + timing;
 
-        if(state <= ledCount) { // First: Turn on all leds sequentually
+        if(state <= ledCount) { // First: Turn on all leds sequentially
+            //printf("LED Strip Sequential:  %d \n", state-1);
             digitalWrite(ledPins[state - 1], HIGH);
-        }else if(state > ledCount + 1){ // Second: running light to right
-            for (int i = 0; i < ledCount; i++) {
-                digitalWrite(ledPins[i], 0);
-            }
-            digitalWrite(ledPins[state - (ledCount+2)], HIGH);
-        }else if(state >= 2*ledCount + 2){ // Second: running light to left
-            for (int i = 0; i < ledCount; i++) {
-                digitalWrite(ledPins[i], 0);
-            }
-            digitalWrite(ledPins[ledCount - (state - (2*ledCount+2))], HIGH);
-        }else if(state >= 3*ledCount + 3){
-            state = 0;
+        }else if((state > ledCount ) && (state < 2*ledCount)){ // Turn off sequentially
+            int ledIndex = state - ledCount - 1;
+            //printf("LED Strip Sequential:  %d \n", ledIndex);
+            digitalWrite(ledPins[ledIndex], 0);
+        }else if((state >= 2*ledCount) && (state < 3*ledCount -1)){ // Second: running light to left
+            clearLeds();
+            int ledIndex = ledCount - (state - (2*ledCount)+2) ;
+            //printf("LED Strip Running Light BACK  %d \n", ledIndex);
+            digitalWrite(ledPins[ledIndex], HIGH);
+        }else {
+            //printf("LED Strip RESET \n");
+            state = 1;
+            next_timing = 0;
         }
+    }
+}
+
+void LedStrip::clearLeds() {
+    for (int i = 0; i < ledCount; i++) {
+        digitalWrite(ledPins[i], 0);
     }
 }
 

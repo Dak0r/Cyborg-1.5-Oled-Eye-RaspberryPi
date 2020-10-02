@@ -9,10 +9,11 @@
 class LedStrip {
 private:
     unsigned long timing = 500;
-    int ledPins[10] = {108, 109, 110, 111, 112, 113, 114, 107, 106, 105};
-    int ledCount = 10;
+    int ledPins[10] = {100, 101, 102, 103, 104, 105, 106, 107};
+    int ledCount = 8;
     int state = 0;
     unsigned long next_timing = 0;
+    void clearLeds();
 
 public:
     void init();
