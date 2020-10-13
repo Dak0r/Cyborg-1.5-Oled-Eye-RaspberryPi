@@ -10,7 +10,7 @@
 class LedBreather {
 private:
     int state = 0;
-    const int breathTime = 1000;
+    const int breathTime = 900;
     const int breathTimeTrans = 250;
     long nextStateTime = 0;
 
