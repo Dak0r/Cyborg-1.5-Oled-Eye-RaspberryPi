@@ -8,6 +8,8 @@
 #include "Natural-Eye-Behavior/Eye.h"
 #include "Natural-Eye-Behavior/EyeConfig.h"
 #include "Utils/LedStrip.h"
+#include "Utils/LedBreather.h"
+#include "Utils/PowerOffButton.h"
 
 using namespace EyeBehavior;
 
@@ -17,6 +19,8 @@ private:
     EyeConfig eye_config;
     Eye eye;
     LedStrip ledStrip;
+    LedBreather ledBreather;
+    PowerOffButton powerOffButton;
     void buildConfig(EyeConfig *eyeConfig);
 
 public:

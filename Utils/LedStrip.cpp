@@ -17,9 +17,6 @@
 void LedStrip::init() {
     mcp23017Setup(BASE, I2CADDR);
 
-    // OLED USES BCM MODE SO WE NEED TO USE THIS TOO
-    //pinMode(16, OUTPUT);
-    //digitalWrite(16, HIGH);
 
     for(int i=0; i < ledCount; i++){
         pinMode(ledPins[i], OUTPUT);

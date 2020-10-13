@@ -76,6 +76,8 @@ void CyberEye::setup(int argc, char **argv) {
 
 
     ledStrip.init();
+    ledBreather.init();
+    powerOffButton.init();
 
 
 }
@@ -88,6 +90,8 @@ bool CyberEye::loop(unsigned long now) {
 
     eye.update(now);
     ledStrip.update(now);
+    ledBreather.update(now);
+    exit_application = powerOffButton.update(now);
 
     /*time(&oled_now);
     timenow = localtime(&oled_now);
@@ -141,5 +145,8 @@ void CyberEye::quit() {
     OLED_DisWindow(0, 0, 128, 128);
     DEV_ModuleExit();
     ledStrip.exit();
+    ledBreather.exit();
+    powerOffButton.exit(); // should be last in order, because it can trigger a system shutdown
+
 }
 
