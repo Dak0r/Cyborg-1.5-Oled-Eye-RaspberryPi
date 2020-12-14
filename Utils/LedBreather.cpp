@@ -28,7 +28,13 @@ void LedBreather::update(unsigned long time) {
             digitalWrite(pinBlue, commonAnodeLedOn);
             pinMode(pinGreen, OUTPUT);
             digitalWrite(pinGreen, commonAnodeLedOn);
-            nextStateTime = time + breathTimeTrans;
+
+            if(!fullCycle){
+                nextStateTime = time + breathTime;
+                state = 0;
+            }else{
+                nextStateTime = time + breathTimeTrans;
+            }
         }else if(state == 3){
             digitalWrite(pinBlue, commonAnodeLedOff);
             pinMode(pinGreen, OUTPUT);

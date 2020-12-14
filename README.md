@@ -21,3 +21,9 @@ The executable will be in a "cmake-build" directory after that.
 Call the Build and Run Script with ip address of your pi and its ssh password:
 ``` build_and_run.sh 192.168.178.XX raspberry```
 This will automatically build the project, sync the executable to your pi and run it in an ssh session.
+
+
+
+
+## Other
+While my Code is License as MIT, this Project uses Alex Mous MPU6050 Libarary (Licensed under the CC BY-NC SA 4.0) (Utils/MPU6050.cpp and Utils/MPU6050.h)

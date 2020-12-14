@@ -9,6 +9,7 @@
 
 class LedBreather {
 private:
+    bool fullCycle = false;
     int state = 0;
     const int breathTime = 900;
     const int breathTimeTrans = 250;

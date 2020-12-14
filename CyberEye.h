@@ -10,6 +10,7 @@
 #include "Utils/LedStrip.h"
 #include "Utils/LedBreather.h"
 #include "Utils/PowerOffButton.h"
+#include "Utils/MPU6050.h"
 
 using namespace EyeBehavior;
 
@@ -21,10 +22,18 @@ private:
     LedStrip ledStrip;
     LedBreather ledBreather;
     PowerOffButton powerOffButton;
+    MPU6050 mpu6050 = MPU6050(0x68);
+    std::vector<EyeModifier*>* active_modifiers;
+
+    float gyroXInit = 0;
+    float gyroYInit = 0;
+    bool gyroInitSet = false;
     void buildConfig(EyeConfig *eyeConfig);
+    void setupEyeModifiers();
+
 
 public:
-    CyberEye() : eye(&eye_config){
+    CyberEye() {
     }
     void setup(int argc, char* argv[]);
 
