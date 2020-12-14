@@ -7,18 +7,12 @@ extern "C" {
 #include "modifiers/RandomLookModifier.h"
 #include "modifiers/RandomBlinkModifier.h"
 
-
 #include <iostream>
 #include <unistd.h>
-
-
 #include <signal.h>
-
 #include <stdio.h>		//printf()
 #include <stdlib.h>		//exit()
-
 #include <time.h>
-
 
 void CyberEye::buildConfig(EyeConfig *eyeConfig) {
     eyeConfig->blink_timing_duration.min = 65; // was -200
@@ -52,11 +46,6 @@ void CyberEye::setupEyeModifiers() {
     active_modifiers->push_back(randomLookModifier);
     active_modifiers->push_back(randomBlinkModifier);
 }
-//
-time_t oled_now;
-struct tm *timenow;
-uint8_t now_time,new_time = 11;
-DEV_TIME sDev_time;
 
 void CyberEye::setup(int argc, char **argv) {
 
@@ -71,14 +60,11 @@ void CyberEye::setup(int argc, char **argv) {
     eye.init_head_gyro();
 
 
-    printf("1.5inch OLED Moudle Demo\r\n");
     //1.System Initialization
     if(DEV_ModuleInit()) {
         std::cout << "CyberEye :: DEV MODULE INIT FAILED -> EXIT" << std::endl;
         exit(0);
     }
-
-
     OLED_Clear(OLED_BACKGROUND);//OLED_BACKGROUND
     OLED_Display();
     //2.show
@@ -88,14 +74,6 @@ void CyberEye::setup(int argc, char **argv) {
 
     OLED_ClearWindow(0, 0, 128, 128, BLACK);
     OLED_DisWindow(0, 0, 128, 128);
-
-    /*printf("OLED Show \r\n");
-    GUI_Show();
-
-    OLED_Clear(OLED_BACKGROUND);//OLED_BACKGROUND*/
-    //OLED_Display();
-
-
 
 	//Calculate the offsets
     /*
