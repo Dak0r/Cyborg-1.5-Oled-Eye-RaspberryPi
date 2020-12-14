@@ -31,6 +31,10 @@ private:
     void buildConfig(EyeConfig *eyeConfig);
     void setupEyeModifiers();
 
+    void render();
+    void setupOLED();
+    void shutdownOLED();
+
 
 public:
     CyberEye() {

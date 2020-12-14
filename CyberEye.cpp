@@ -59,21 +59,7 @@ void CyberEye::setup(int argc, char **argv) {
     eye.init(millis(), &eye_config, active_modifiers);
     eye.init_head_gyro();
 
-
-    //1.System Initialization
-    if(DEV_ModuleInit()) {
-        std::cout << "CyberEye :: DEV MODULE INIT FAILED -> EXIT" << std::endl;
-        exit(0);
-    }
-    OLED_Clear(OLED_BACKGROUND);//OLED_BACKGROUND
-    OLED_Display();
-    //2.show
-    printf("**********Init OLED**********\r\n");
-    OLED_SCAN_DIR OLED_ScanDir = SCAN_DIR_DFT;//SCAN_DIR_DFT = D2U_L2R
-    OLED_Init(OLED_ScanDir );
-
-    OLED_ClearWindow(0, 0, 128, 128, BLACK);
-    OLED_DisWindow(0, 0, 128, 128);
+    setupOLED();
 
 	// Calculate Gyro offsets
 	// Uncomment, run once and paste values into Utils/MPU6050.h
@@ -113,8 +99,13 @@ bool CyberEye::loop(unsigned long now) {
     exit_application = powerOffButton.update(now);
 
     // RENDERING
-    OLED_ClearWindow(0, 0, 128, 128, BLACK);
+    render();
 
+    return exit_application;
+}
+
+void CyberEye::render() {
+    OLED_ClearWindow(0, 0, 128, 128, BLACK);
 
     // Render Base Eye
     float eye_pos_x = eye.get_position_x();
@@ -140,20 +131,40 @@ bool CyberEye::loop(unsigned long now) {
 
 
     OLED_DisWindow(0, 0, 127, 127);
-
-    return exit_application;
 }
 
 void CyberEye::quit() {
 
     delete (active_modifiers);
 
-    OLED_ClearWindow(0, 0, 128, 128, BLACK);
-    OLED_DisWindow(0, 0, 128, 128);
-    DEV_ModuleExit();
+    shutdownOLED();
+
     ledStrip.exit();
     ledBreather.exit();
     powerOffButton.exit(); // should be last in order, because it can trigger a system shutdown
 
+}
+
+void CyberEye::setupOLED() {
+    //1.System Initialization
+    if(DEV_ModuleInit()) {
+        std::cout << "CyberEye :: DEV MODULE INIT FAILED -> EXIT" << std::endl;
+        exit(0);
+    }
+    OLED_Clear(OLED_BACKGROUND);//OLED_BACKGROUND
+    OLED_Display();
+    //2.show
+    printf("**********Init OLED**********\r\n");
+    OLED_SCAN_DIR OLED_ScanDir = SCAN_DIR_DFT;//SCAN_DIR_DFT = D2U_L2R
+    OLED_Init(OLED_ScanDir );
+
+    OLED_ClearWindow(0, 0, 128, 128, BLACK);
+    OLED_DisWindow(0, 0, 128, 128);
+}
+
+void CyberEye::shutdownOLED() {
+    OLED_ClearWindow(0, 0, 128, 128, BLACK);
+    OLED_DisWindow(0, 0, 128, 128);
+    DEV_ModuleExit();
 }
 
