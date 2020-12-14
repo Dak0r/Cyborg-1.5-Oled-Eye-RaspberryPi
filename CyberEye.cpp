@@ -75,12 +75,14 @@ void CyberEye::setup(int argc, char **argv) {
     OLED_ClearWindow(0, 0, 128, 128, BLACK);
     OLED_DisWindow(0, 0, 128, 128);
 
-	//Calculate the offsets
+	// Calculate Gyro offsets
+	// Uncomment, run once and paste values into Utils/MPU6050.h
     /*
      float ax, ay, az, gr, gp, gy; //Variables to store the accel, gyro and angle values
 	std::cout << "Calculating the offsets...\n    Please keep the accelerometer level and still\n    This could take a couple of minutes...";
 	mpu6050.getOffsets(&ax, &ay, &az, &gr, &gp, &gy);
 	std::cout << "Gyroscope R,P,Y: " << gr << "," << gp << "," << gy << "\nAccelerometer X,Y,Z: " << ax << "," << ay << "," << az << "\n";
+     exit(0);
      */
 
     ledStrip.init();
