@@ -6,6 +6,7 @@ extern "C" {
 }
 #include "modifiers/RandomLookModifier.h"
 #include "modifiers/RandomBlinkModifier.h"
+#include "modifiers/GyroAffectedLookModifier.h"
 
 #include <iostream>
 #include <unistd.h>
@@ -38,13 +39,19 @@ void CyberEye::setupEyeModifiers() {
     unsigned long now = millis();
 
     EyeModifier* randomLookModifier = new RandomLookModifier();
+    EyeModifier* gyroAffectedLookModifier = new GyroAffectedLookModifier();
+
     EyeModifier* randomBlinkModifier = new RandomBlinkModifier();
 
     randomLookModifier->init(now, 1);
+    gyroAffectedLookModifier->init(now, 1);
     randomBlinkModifier->init(now, 1);
 
     active_modifiers->push_back(randomLookModifier);
+    active_modifiers->push_back(gyroAffectedLookModifier);
+
     active_modifiers->push_back(randomBlinkModifier);
+
 }
 
 void CyberEye::setup(int argc, char **argv) {
@@ -111,13 +118,15 @@ void CyberEye::render() {
     float eye_pos_x = eye.get_position_x();
     float eye_pos_y = eye.get_position_y();
 
-    if(eye_pos_x > 1) { eye_pos_x = 1; }
+    //eye_pos_x = -1;
+    //eye_pos_y = -1;
+    /*if(eye_pos_x > 1) { eye_pos_x = 1; }
     if(eye_pos_x < -1) { eye_pos_x = -1; }
     if(eye_pos_y > 1) { eye_pos_x = 1; }
-    if(eye_pos_y < -1) { eye_pos_y = -1; }
+    if(eye_pos_y < -1) { eye_pos_y = -1; }*/
 
-    int posX = (int)(64 + (eye_pos_x*18));
-    int posY = (int)(64 + (eye_pos_y*10));
+    int posX = (int)(64 + (eye_pos_x*18)); // was 18
+    int posY = (int)(64 + (eye_pos_y*18)); // was 10
     int size = 36;
     GUI_DrawCircle(posX, posY, size+10, WHITE, DRAW_EMPTY , DOT_PIXEL_DFT);
     GUI_DrawCircle(posX, posY, size+6, WHITE, DRAW_EMPTY , DOT_PIXEL_DFT);
@@ -130,7 +139,7 @@ void CyberEye::render() {
     OLED_ClearWindow(0, lerpInt(0, 128, eye.get_lower_eyelid()), 128, 128, BLACK);
 
 
-    OLED_DisWindow(0, 0, 127, 127);
+    OLED_DisWindow(0, 0, 128, 128);
 }
 
 void CyberEye::quit() {
