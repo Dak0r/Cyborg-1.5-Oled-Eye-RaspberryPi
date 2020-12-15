@@ -125,12 +125,15 @@ void CyberEye::render() {
     if(eye_pos_y > 1) { eye_pos_x = 1; }
     if(eye_pos_y < -1) { eye_pos_y = -1; }*/
 
-    int posX = (int)(64 + (eye_pos_x*18)); // was 18
-    int posY = (int)(64 + (eye_pos_y*18)); // was 10
-    int size = 36;
-    GUI_DrawCircle(posX, posY, size+10, WHITE, DRAW_EMPTY , DOT_PIXEL_DFT);
-    GUI_DrawCircle(posX, posY, size+6, WHITE, DRAW_EMPTY , DOT_PIXEL_DFT);
-    GUI_DrawCircle(posX, posY, size*eye.get_pupil_size(), WHITE, DRAW_FULL , DOT_PIXEL_DFT);
+    //int posX = (int)(64 + (eye_pos_x*18)); // was 18
+    //int posY = (int)(64 + (eye_pos_y*18)); // was 10
+    int size = 30;
+    GUI_DrawCircle(getScreenPos(eye_pos_x, 0), getScreenPos(eye_pos_y, 0), size+16, WHITE, DRAW_EMPTY , DOT_PIXEL_DFT);
+    GUI_DrawCircle(getScreenPos(eye_pos_x, 1), getScreenPos(eye_pos_y, 1), size+12, WHITE, DRAW_EMPTY , DOT_PIXEL_DFT);
+    GUI_DrawCircle(getScreenPos(eye_pos_x, 2), getScreenPos(eye_pos_y, 2), size+8, WHITE, DRAW_EMPTY , DOT_PIXEL_DFT);
+    GUI_DrawCircle(getScreenPos(eye_pos_x, 4), getScreenPos(eye_pos_y, 4), size+4, WHITE, DRAW_EMPTY , DOT_PIXEL_DFT);
+    GUI_DrawCircle(getScreenPos(eye_pos_x, 5), getScreenPos(eye_pos_y, 5), size+0, WHITE, DRAW_EMPTY , DOT_PIXEL_DFT);
+    GUI_DrawCircle(getScreenPos(eye_pos_x, 1), getScreenPos(eye_pos_y, 1), (size-4)*eye.get_pupil_size()+4, WHITE, DRAW_FULL , DOT_PIXEL_DFT);
 
     // Render Upper Eye Lid
     OLED_ClearWindow(0, 0, 128, lerpInt(0, 128, eye.get_upper_eyelid()), BLACK);
@@ -140,6 +143,13 @@ void CyberEye::render() {
 
 
     OLED_DisWindow(0, 0, 128, 128);
+}
+
+int CyberEye::getScreenPos(float eyePos, float distance){
+    int maxDistance = 10;
+    if(distance < 0){ distance = 0;}else if(distance > maxDistance){distance = maxDistance;}
+    float  distanceFactor = ((maxDistance+1)-distance)/(maxDistance+1);
+    return (int)(64 + (eyePos*distanceFactor*18));
 }
 
 void CyberEye::quit() {

@@ -34,6 +34,7 @@ private:
     void render();
     void setupOLED();
     void shutdownOLED();
+    int getScreenPos(float eyePos, float distance);
 
 
 public:
